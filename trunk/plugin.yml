@@ -1,0 +1,53 @@
+name: WorldGen
+main: local.thehutman.worldgen.WorldGen
+version: 1.2.0
+description: WorldGen provides a mechanism to manually run world generation functions for structures.
+author: Michael Huttinger
+
+permissions:
+  worldgen.*:
+    description: Gives all WorldGen permissions
+    children:
+      worldgen.command: true
+  worldgen.command:
+    description: Allow user to run the worldgen command
+    default: op
+    children:
+      worldgen.command.deserttemple: true
+      worldgen.command.jungletemple: true
+      worldgen.command.mineshaft: true
+      worldgen.command.nether: true
+      worldgen.command.stronghold: true
+      worldgen.command.village: true
+      worldgen.command.simple: true
+      worldgen.command.witch: true
+  worldgen.command.deserttemple:
+    description: Allow user to generate a desert temple
+    default: op
+  worldgen.command.jungletemple:
+    description: Allow user to generate a jungle temple
+    default: op
+  worldgen.command.mineshaft:
+    description: Allow user to generate a mineshaft complex
+    default: op
+  worldgen.command.nether:
+    description: Allow user to generate a nether complex items
+    default: op
+  worldgen.command.stronghold:
+    description: Allow user to generate a stronghold complex and rooms
+    default: op
+  worldgen.command.village:
+    description: Allow user to generate a village complex
+    default: op
+  worldgen.command.simple:
+    description: Allow user to generate a simple items (wells, mushrooms, etc)
+    default: op
+  worldgen.command.witch:
+    description: Allow user to generate a witch's hut
+    default: op
+
+commands:
+  worldgen:
+    description: This will generate minecraft world structures at the current player location.
+    usage: /<command> [type] [radius=200].  Use [type]=help for details.
+    permission: worldgen.command
