@@ -1,3 +1,7 @@
+/**
+ * WorldGen plugin - (c) 2013 by Michael Huttinger (TheHUTMan)
+ * LPGL v3.0 License
+ */
 package local.thehutman.worldgen;
 
 import java.lang.reflect.Field;
