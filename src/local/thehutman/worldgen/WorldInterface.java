@@ -91,10 +91,10 @@ public class WorldInterface {
 		Field randField;
 		if (envType == -1) {
 			clObjChunkGen = Class.forName(pckMinecraft + ".ChunkProviderHell");
-			randField = clObjChunkGen.getDeclaredField("i");
+			randField = clObjChunkGen.getDeclaredField("j");
 		} else if (envType == 1) {
 			clObjChunkGen = Class.forName(pckMinecraft + ".ChunkProviderTheEnd");
-			randField = clObjChunkGen.getDeclaredField("i");
+			randField = clObjChunkGen.getDeclaredField("h");
 		} else {
 			// Normal world has FLAT type generator
 			if (player.getWorld().getWorldType() == WorldType.FLAT) {
@@ -102,7 +102,7 @@ public class WorldInterface {
 				randField = clObjChunkGen.getDeclaredField("b");
 			} else {
 				clObjChunkGen = Class.forName(pckMinecraft + ".ChunkProviderGenerate");
-				randField = clObjChunkGen.getDeclaredField("k");
+				randField = clObjChunkGen.getDeclaredField("h");
 			}
 		}
 
