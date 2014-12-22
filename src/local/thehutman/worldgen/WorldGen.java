@@ -155,6 +155,7 @@ public class WorldGen extends JavaPlugin implements CommandExecutor {
 				}
 				if (radius == 2 || !(sender instanceof Player)) {
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen witch" + ChatColor.WHITE + " - Generate a witch's hut");
+					sender.sendMessage(ChatColor.YELLOW + "/worldgen monument/wtemple/watertemple" + ChatColor.WHITE + " - Generate an Ocean Monument");
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen jtemple" + ChatColor.WHITE + " - Generate a jungle temple");
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen dtemple" + ChatColor.WHITE + " - Generate a desert temple");
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen well" + ChatColor.WHITE + " - Generate a desert well");
