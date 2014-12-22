@@ -13,6 +13,7 @@ permissions:
     description: Allow user to run the worldgen command
     default: op
     children:
+      worldgen.command.monument: true
       worldgen.command.deserttemple: true
       worldgen.command.jungletemple: true
       worldgen.command.mineshaft: true
@@ -21,6 +22,9 @@ permissions:
       worldgen.command.village: true
       worldgen.command.simple: true
       worldgen.command.witch: true
+  worldgen.command.monument:
+    description: Allow user to generate a desert temple
+    default: op
   worldgen.command.deserttemple:
     description: Allow user to generate a desert temple
     default: op
