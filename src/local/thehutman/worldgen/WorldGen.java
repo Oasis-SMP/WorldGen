@@ -106,6 +106,8 @@ public class WorldGen extends JavaPlugin implements CommandExecutor {
 				GenType4.generate(player, "worldgen.command.simple", "swamp tree", "WorldGenSwampTree");
 			} else if (type.equals("stronghold")) {
 				GenType3.generate(player, radius, "worldgen.command.stronghold", "stronghold", "WorldGenStronghold2Start");
+			} else if (type.equals("monument") || type.equals("wtemple") || type.equals("watertemple")){
+				GenType3.generate(player, radius, "worldgen.command.monument","ocean monument", "WorldGenMonumentStart");
 			} else if (type.equals("mineshaft")) {
 				GenType3.generate(player, radius, "worldgen.command.mineshaft", "mineshaft", "WorldGenMineshaftStart");
 			} else if (type.equals("shportal") || type.equals("strongholdportal")) {
