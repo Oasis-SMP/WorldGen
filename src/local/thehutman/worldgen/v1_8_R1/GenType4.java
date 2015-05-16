@@ -2,48 +2,50 @@
  * WorldGen plugin - (c) 2013 by Michael Huttinger (TheHUTMan)
  * LPGL v3.0 License
  */
-package local.thehutman.worldgen;
+package local.thehutman.worldgen.v1_8_R1;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.Random;
+
+import local.thehutman.worldgen.Utility;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 /**
- * Type1 generation of a Minecraft structure. This has requirements of:
+ * Type4 generation of structures at the player's current location.
  * 
- * A constructor: c(Random,int,int)
+ * A constructor: c()
  * 
- * A method: a(World,Random,StructureBoundingBox)
+ * A method: a(World,Random,int,int,int)
  * 
- * Example: WorldGenJungleTemple
+ * Example: WorldGenDesertWell
  * 
  * @author Huttinger
+ * 
  */
-class GenType1 {
+class GenType4 {
 
 	/**
-	 * Type1 generation of a Minecraft structure. This has requirements of:
+	 * Type4 generation of structures at the player's current location.
 	 * 
-	 * A constructor: c(Random,int,int)
+	 * A constructor: c()
 	 * 
-	 * A method: a(World,Random,StructureBoundingBox)
+	 * A method: a(World,Random,int,int,int)
 	 * 
 	 * @param player
 	 *            Player object
-	 * @param radius
-	 *            Radius to limit creation to
-	 * @param namePerm
+	 * @param className
+	 *            Name of class for structure to build. Must have a simple
+	 *            constructor with no parameters and the generate method (a)
+	 *            takes world, random, and position arguments.
+	 * @param permName
 	 *            Name of permission required (i.e. worldgen.command.simple)
-	 * @param nameDisplay
-	 *            Name of structure being built as displayed to the user/logger
-	 * @param nameClass
-	 *            Name of class for structure to build.
+	 * @param dispName
+	 *            Name of structure as displayed to the user/logger
 	 */
-	public static void generate(Player player, int radius, String namePerm, String nameDisplay, String nameClass) {
+	public static void generate(Player player, String namePerm, String nameDisplay, String nameClass) {
 
 		if (!(player.hasPermission(namePerm))) {
 
@@ -62,33 +64,38 @@ class GenType1 {
 				player.sendMessage(ChatColor.RED + "Failed to generate " + nameDisplay + ". Please check server log.");
 				return;
 			}
-			
-			// Get current block position
+
+			// Get current block position and the surface level block at that
+			// point
 			Block block = player.getLocation().getBlock();
 			int x = block.getX();
 			int z = block.getZ();
+			int y = player.getWorld().getHighestBlockYAt(x, z);
+			
+			// Nether world heights don't work right
+			if(player.getWorld().getEnvironment().getId() == -1)
+				y = block.getY();
 
 			// Get the witch hut gen object via our current block's chunk
-			Constructor<?> cGen = i.clObjGenerator.getConstructor(Random.class, int.class, int.class);
+			Constructor<?> cGen = i.clObjGenerator.getConstructor();
 			cGen.setAccessible(true);
-			Object oGen = cGen.newInstance(i.oRandom, x, z);
-
-			// Prep the bounding box
-			Constructor<?> cBox = i.clObjStrucBox.getConstructor(int.class, int.class, int.class, int.class);
-			Object oBox = cBox.newInstance(x - radius, z - radius, x + radius, z + radius);
+			Object oGen = cGen.newInstance();
 
 			// Execute the generation start method
 			@SuppressWarnings("rawtypes")
-			Class[] parameterTypes = new Class[3];
+			Class[] parameterTypes = new Class[5];
 			parameterTypes[0] = i.clObjWorld;
 			parameterTypes[1] = i.oRandom.getClass();
-			parameterTypes[2] = i.clObjStrucBox;
+			parameterTypes[2] = int.class;
+			parameterTypes[3] = int.class;
+			parameterTypes[4] = int.class;
 			Method a = i.clObjGenerator.getDeclaredMethod("a", parameterTypes);
-			Boolean r = (Boolean) a.invoke(oGen, i.oCraftWorldHandle, i.oRandom, oBox);
+			Boolean r = (Boolean) a.invoke(oGen, i.oCraftWorldHandle, i.oRandom, x, y, z);
 
 			// Check results
 			if (!r)
-				player.sendMessage(ChatColor.RED + "Unable to generate a " + nameDisplay + " at this location.");
+				player.sendMessage(ChatColor.RED + "Unable to generate " + nameDisplay
+						+ " at this location.  Be sure you are on proper materials for this structure.");
 			else {
 				Utility.log.info("Generated " + nameDisplay + " at: (" + x + "," + z + ")");
 				player.sendMessage("Generated a new " + nameDisplay + "!");
@@ -98,6 +105,6 @@ class GenType1 {
 			e.printStackTrace();
 			player.sendMessage(ChatColor.RED + "Failed to generate " + nameDisplay + ". Please check server log.");
 		}
-
 	}
+
 }

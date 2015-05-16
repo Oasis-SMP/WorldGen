@@ -2,7 +2,7 @@
  * WorldGen plugin - (c) 2013 by Michael Huttinger (TheHUTMan)
  * LPGL v3.0 License
  */
-package local.thehutman.worldgen;
+package local.thehutman.worldgen.v1_7_R3;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -10,6 +10,9 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.Random;
 
+import local.thehutman.worldgen.Utility;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

@@ -2,11 +2,13 @@
  * WorldGen plugin - (c) 2013 by Michael Huttinger (TheHUTMan)
  * LPGL v3.0 License
  */
-package local.thehutman.worldgen;
+package local.thehutman.worldgen.v1_8_R1;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Random;
+
+import local.thehutman.worldgen.Utility;
 
 import org.bukkit.WorldType;
 import org.bukkit.entity.Player;

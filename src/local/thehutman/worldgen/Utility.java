@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author Huttinger
  * 
  */
-class Utility {
+public class Utility {
 
 	/**
 	 * Global static property holding an instance to the console logger for our plugin

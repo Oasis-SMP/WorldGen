@@ -1,8 +1,8 @@
 name: WorldGen
 main: local.thehutman.worldgen.WorldGen
-version: 1.2.0
+version: 2.0
 description: WorldGen provides a mechanism to manually run world generation functions for structures.
-author: Michael Huttinger
+authors: [Michael Huttinger, Albert Marty, Norm Poulin]
 
 permissions:
   worldgen.*:
@@ -23,7 +23,7 @@ permissions:
       worldgen.command.simple: true
       worldgen.command.witch: true
   worldgen.command.monument:
-    description: Allow user to generate a desert temple
+    description: Allow user to generate a water temple
     default: op
   worldgen.command.deserttemple:
     description: Allow user to generate a desert temple
