@@ -1,4 +1,4 @@
-package local.thehutman.worldgen.v1_7_R3;
+package local.thehutman.worldgen.v1_8_R3;
 
 import local.thehutman.worldgen.WorldGen;
 
@@ -8,10 +8,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class WorldGenCommand  implements CommandExecutor{
-	
+public class WorldGenCommand implements CommandExecutor{
+
 	private WorldGen plugin;
-	
+
 	public WorldGenCommand (WorldGen plugin){
 		this.plugin = plugin;
 	}
@@ -38,7 +38,7 @@ public class WorldGenCommand  implements CommandExecutor{
 				type = args[0].toLowerCase();
 			if (args.length == 2)
 				radius = Integer.parseInt(args[1]);
-			
+
 			// Check if this is a player, or if we are asking for help
 			if (!(sender instanceof Player)) {
 				if (!type.equals("") && !type.equals("help")) {
@@ -85,32 +85,14 @@ public class WorldGenCommand  implements CommandExecutor{
 				GenType4.generate(player, "worldgen.command.simple", "swamp tree", "WorldGenSwampTree");
 			} else if (type.equals("stronghold")) {
 				GenType3.generate(player, radius, "worldgen.command.stronghold", "stronghold", "WorldGenStronghold2Start");
+			} else if (type.equals("monument") || type.equals("wtemple") || type.equals("watertemple")){
+				GenType3.generate(player, radius, "worldgen.command.monument","ocean monument", "WorldGenMonumentStart");
 			} else if (type.equals("mineshaft")) {
 				GenType3.generate(player, radius, "worldgen.command.mineshaft", "mineshaft", "WorldGenMineshaftStart");
 			} else if (type.equals("shportal") || type.equals("strongholdportal")) {
 				GenType5.generate(player, 10, "worldgen.command.stronghold", "stronghold portal room", "WorldGenStrongholdPortalRoom");
 			} else if (type.equals("netherfortress") || type.equals("fortress")) {
 				GenType3.generate(player, radius, "worldgen.command.nether", "nether fortress", "WorldGenNetherStart");
-			} else if (type.equals("vblack")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village blacksmith", "WorldGenVillageBlacksmith", "b", 0);
-			} else if (type.equals("vbutcher")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village butcher", "WorldGenVillageButcher", "a", 0);
-			} else if (type.equals("vfarm")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village farm", "WorldGenVillageFarm", "a", -1);
-			} else if (type.equals("vfarm2")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village farm (type2)", "WorldGenVillageFarm2", "a", -1);
-			} else if (type.equals("vhouse")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village house", "WorldGenVillageHouse", "a", 0);
-			} else if (type.equals("vhouse2")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village house (type2)", "WorldGenVillageHouse2", "a", 0);
-			} else if (type.equals("vhut")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village hut", "WorldGenVillageHut", "a", 0);
-			} else if (type.equals("vlibrary") ){
-				GenType6.generate(player, 10, "worldgen.command.village", "village library", "WorldGenVillageLibrary", "a", 0);
-			} else if (type.equals("vlight")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village light pole", "WorldGenVillageLight", "a", -1);
-			} else if (type.equals("vtemple")) {
-				GenType6.generate(player, 10, "worldgen.command.village", "village temple", "WorldGenVillageTemple", "a", 0);
 			} else if (type.equals("help")) {
 
 				// Get page number (next parameter)
@@ -132,27 +114,21 @@ public class WorldGenCommand  implements CommandExecutor{
 				}
 				if (radius == 2 || !(sender instanceof Player)) {
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen witch" + ChatColor.WHITE + " - Generate a witch's hut");
+					sender.sendMessage(ChatColor.YELLOW + "/worldgen monument/wtemple/watertemple" + ChatColor.WHITE + " - Generate an Ocean Monument");
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen jtemple" + ChatColor.WHITE + " - Generate a jungle temple");
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen dtemple" + ChatColor.WHITE + " - Generate a desert temple");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen well" + ChatColor.WHITE + " - Generate a desert well");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen shroom" + ChatColor.WHITE + " - Generate a giant mushroom");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen reed" + ChatColor.WHITE + " - Generate sugar cane field (near water)");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen lily" + ChatColor.WHITE + " - Generate a lily patch (on water)");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen pumpkin" + ChatColor.WHITE + " - Generate a pumpkin patch");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen swamptree" + ChatColor.WHITE + " - Generate a swamp tree");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen shportal" + ChatColor.WHITE + " - Generate a stronghold portal room");
 				}
 				if (radius == 3 || !(sender instanceof Player)) {
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vblack" + ChatColor.WHITE + " - Generate a village blacksmith");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vbutcher" + ChatColor.WHITE + " - Generate a village butcher");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vfarm" + ChatColor.WHITE + " - Generate a village farm");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vfarm2" + ChatColor.WHITE + " - Generate a village farm x2");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vhouse" + ChatColor.WHITE + " - Generate a village house");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vhouse2" + ChatColor.WHITE + " - Generate a village house x2");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vhut" + ChatColor.WHITE + " - Generate a village hut");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vlibrary" + ChatColor.WHITE + " - Generate a village library");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vlight" + ChatColor.WHITE + " - Generate a village light pole");
-					sender.sendMessage(ChatColor.YELLOW + "/worldgen vtemple" + ChatColor.WHITE + " - Generate a village temple");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vblack" + ChatColor.WHITE + " - Generate a village blacksmith");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vbutcher" + ChatColor.WHITE + " - Generate a village butcher");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vfarm" + ChatColor.WHITE + " - Generate a village farm");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vfarm2" + ChatColor.WHITE + " - Generate a village farm x2");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vhouse" + ChatColor.WHITE + " - Generate a village house");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vhouse2" + ChatColor.WHITE + " - Generate a village house x2");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vhut" + ChatColor.WHITE + " - Generate a village hut");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vlibrary" + ChatColor.WHITE + " - Generate a village library");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vlight" + ChatColor.WHITE + " - Generate a village light pole");
+//					sender.sendMessage(ChatColor.YELLOW + "/worldgen vtemple" + ChatColor.WHITE + " - Generate a village temple");
 				}
 				return true;
 			} else {

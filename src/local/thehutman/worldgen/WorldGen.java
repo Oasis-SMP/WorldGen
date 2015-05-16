@@ -25,12 +25,35 @@ import org.bukkit.plugin.java.JavaPlugin;
  * 
  */
 public class WorldGen extends JavaPlugin{
+	
+	public CommandExecutor wgen;
 
 	@Override
 	public void onEnable() {
 
+		String packageName = this.getServer().getClass().getPackage().getName();
+		String version = packageName.substring(packageName.lastIndexOf('.') + 1);
+		if(version.contains("v1_7")){
+			version.equals("v1_7_R3");
+		}
+		
+		try {
+            final Class<?> clazz = Class.forName("local.thehutman.worldgen." + version + ".WorldGenCommand");
+            // Check if we have a NMSHandler class at that location.
+            if (CommandExecutor.class.isAssignableFrom(clazz)) { // Make sure it actually implements NMS
+                this.wgen = (CommandExecutor) clazz.getConstructor(WorldGen.class).newInstance(this); // Set our handler
+            }
+        } catch (final Exception e) {
+            e.printStackTrace();
+            this.getLogger().severe("Could not find support for this CraftBukkit version.");
+            this.getLogger().info("Check for updates at http://dev.bukkit.org/bukkit-plugins/worldgen/");
+            this.setEnabled(false);
+            return;
+        }
+        this.getLogger().info("Loading support for " + version);
+		
 		// Init commands
-		getCommand("worldgen");
+		getCommand("worldgen").setExecutor(wgen);
 
 		// Save our logger for utility work later
 		Utility.log = getLogger();
