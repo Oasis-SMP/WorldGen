@@ -50,7 +50,7 @@ public class WorldGen extends JavaPlugin{
             this.setEnabled(false);
             return;
         }
-        this.getLogger().info("Loading support for " + version);
+        this.getLogger().info("Loading support for " + packageName.substring(packageName.lastIndexOf('.') + 1));
 		
 		// Init commands
 		getCommand("worldgen").setExecutor(wgen);

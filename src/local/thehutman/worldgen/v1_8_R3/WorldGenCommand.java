@@ -55,44 +55,21 @@ public class WorldGenCommand implements CommandExecutor{
 					player.sendMessage(ChatColor.RED + "Villages can not be generated in the Nether.");
 					return true;
 				}
-				GenType2.generate(player, radius, "worldgen.command.village", "village", "WorldGenVillageStart");
+				WorldGenVillage.generate(player, radius, "worldgen.command.village");
 			} else if (type.equals("witch") || type.equals("witchhut")) {
-				GenType1.generate(player, radius, "worldgen.command.witch", "witch's hut", "WorldGenWitchHut");
+				WorldGenTemple.generate(player, radius, "worldgen.command.witch");
 			} else if (type.equals("jtemple") || type.equals("jungletemple")) {
-				GenType1.generate(player, radius, "worldgen.command.jungletemple", "jungle temple", "WorldGenJungleTemple");
+				WorldGenTemple.generate(player, radius, "worldgen.command.jungletemple");
 			} else if (type.equals("dtemple") || type.equals("deserttemple")) {
-				GenType1.generate(player, radius, "worldgen.command.deserttemple", "desert temple", "WorldGenPyramidPiece");
-			} else if (type.equals("well") || type.equals("desertwell")) {
-				// You must be on sand for a well to generate
-				GenType4.generate(player, "worldgen.command.simple", "well", "WorldGenDesertWell");
-			} else if (type.equals("mushroom") || type.equals("shroom")) {
-				// You must be ON grass, dirt, or mycelium for a shroom to
-				// generate. Seems to be a bit picky as to location, so try
-				// around the area to get one to generate.
-				GenType4.generate(player, "worldgen.command.simple", "huge mushroom", "WorldGenHugeMushroom");
-			} else if (type.equals("reed")) {
-				// Note -- you must be ON grass, dirt, or sand next to water
-				// for reeds to generate
-				GenType4.generate(player, "worldgen.command.simple", "reeds", "WorldGenReed");
-			} else if (type.equals("lily")) {
-				// You must be over water for lilies to generate
-				GenType4.generate(player, "worldgen.command.simple", "water lilies", "WorldGenWaterLily");
-			} else if (type.equals("pumpkin")) {
-				// Needs to be ON grass to work.
-				GenType4.generate(player, "worldgen.command.simple", "pumpkins", "WorldGenPumpkin");
-			} else if (type.equals("swamptree")) {
-				// Generate on grass or dirt (can be in shallow water)
-				GenType4.generate(player, "worldgen.command.simple", "swamp tree", "WorldGenSwampTree");
+				WorldGenTemple.generate(player, radius, "worldgen.command.deserttemple");
 			} else if (type.equals("stronghold")) {
-				GenType3.generate(player, radius, "worldgen.command.stronghold", "stronghold", "WorldGenStronghold2Start");
+				WorldGenNMS.generate(player, radius, "worldgen.command.stronghold", "stronghold", "WorldGenStronghold");
 			} else if (type.equals("monument") || type.equals("wtemple") || type.equals("watertemple")){
-				GenType3.generate(player, radius, "worldgen.command.monument","ocean monument", "WorldGenMonumentStart");
+				WorldGenNMS.generate(player, radius, "worldgen.command.monument","ocean monument", "WorldGenMonument");
 			} else if (type.equals("mineshaft")) {
-				GenType3.generate(player, radius, "worldgen.command.mineshaft", "mineshaft", "WorldGenMineshaftStart");
-			} else if (type.equals("shportal") || type.equals("strongholdportal")) {
-				GenType5.generate(player, 10, "worldgen.command.stronghold", "stronghold portal room", "WorldGenStrongholdPortalRoom");
+				WorldGenMineshaft.generate(player, radius, "worldgen.command.mineshaft");
 			} else if (type.equals("netherfortress") || type.equals("fortress")) {
-				GenType3.generate(player, radius, "worldgen.command.nether", "nether fortress", "WorldGenNetherStart");
+				WorldGenNMS.generate(player, radius, "worldgen.command.nether", "nether fortress", "WorldGenNether");
 			} else if (type.equals("help")) {
 
 				// Get page number (next parameter)

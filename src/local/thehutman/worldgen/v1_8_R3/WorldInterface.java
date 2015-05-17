@@ -37,6 +37,7 @@ public class WorldInterface {
 	Class<?> clObjWorldProvider;
 	Class<?> clObjStrucBox;
 	Class<?> clObjStruc;
+	Class<?> clObjStart;
 
 	public WorldInterface(Player player, String nameClass) {
 		
@@ -55,6 +56,10 @@ public class WorldInterface {
 			clObjWorldProvider = Class.forName(pckMinecraft + ".WorldProvider");
 			clObjStrucBox = Class.forName(pckMinecraft + ".StructureBoundingBox");
 			clObjStruc = Class.forName(pckMinecraft + ".StructureStart");
+			for(Class<?> myclass:clObjGenerator.getDeclaredClasses()){
+				clObjStart = myclass;
+				break;
+			}
 
 			// Generate object references we will need later
 			
