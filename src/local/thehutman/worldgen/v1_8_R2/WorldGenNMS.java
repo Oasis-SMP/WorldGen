@@ -1,35 +1,32 @@
-package local.thehutman.worldgen.v1_8_R3;
+package local.thehutman.worldgen.v1_8_R2;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Random;
 
 import local.thehutman.worldgen.Utility;
-import local.thehutman.worldgen.v1_8_R3.WorldInterface;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-class WorldGenMineshaft {
+public class WorldGenNMS {
 	
-	public static void generate(Player player, int radius, String namePerm) {
-
+	public static void generate(Player player, int radius, String namePerm, String displayName, String nameClass){
 		if (!(player.hasPermission(namePerm))) {
 
 			player.sendMessage(ChatColor.RED + "You do not have permissions for generating that!");
 			return;
 		}
 
-		Utility.log.info("Generating mineshaft...");
-
+		Utility.log.info("Generating " + displayName + "...");
+		
 		try {
 
 			// Get Crafting packages
-			WorldInterface i = new WorldInterface(player, "WorldGenMineshaftStart");
-			if(i.oCraftWorldHandle == null)
-			{
-				player.sendMessage(ChatColor.RED + "Failed to generate mineshaft. Please check server log.");
+			WorldInterface i = new WorldInterface(player, nameClass);
+			if (i.oCraftWorldHandle == null) {
+				player.sendMessage(ChatColor.RED + "Failed to generate " + displayName + ". Please check server log.");
 				return;
 			}
 
@@ -39,9 +36,9 @@ class WorldGenMineshaft {
 			int z = block.getChunk().getZ();
 
 			// Get the generation start object via our current block's chunk
-			Constructor<?> cGen = i.clObjGenerator.getConstructor(i.clObjWorld, Random.class, int.class, int.class);
-			cGen.setAccessible(true);
-			Object oGen = cGen.newInstance(i.oCraftWorldHandle, i.oRandom, x, z);
+			i.clObjGenerator.getConstructor().newInstance();
+			
+			Object myObject = i.clObjStart.getConstructor(i.clObjWorld, Random.class, int.class, int.class).newInstance(i.oCraftWorldHandle, i.oRandom, x, z);
 
 			// Move to middle of chunk
 			x = (x << 4) + 8;
@@ -58,17 +55,17 @@ class WorldGenMineshaft {
 			parameterTypes[1] = i.oRandom.getClass();
 			parameterTypes[2] = i.clObjStrucBox;
 			Method a = i.clObjStruc.getDeclaredMethod("a", parameterTypes);
-			a.invoke(oGen, i.oCraftWorldHandle, i.oRandom, oBox);
+			a.invoke(myObject, i.oCraftWorldHandle, i.oRandom, oBox);
 
 			// All done!
-			Utility.log.info("Generated mineshaft at: (" + x + "," + z + ")");
-			player.sendMessage("Generated a new mineshaft!");
+			Utility.log.info("Generated " + displayName + " at: (" + x + "," + z + ")");
+			player.sendMessage("Generated a new " + displayName + "!");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			player.sendMessage(ChatColor.RED + "Failed to generate mineshaft. Please check server log.");
+			player.sendMessage(ChatColor.RED + "Failed to generate " + displayName + ". Please check server log.");
 		}
-
+		
 	}
 
 }

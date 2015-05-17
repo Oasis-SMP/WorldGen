@@ -2,7 +2,7 @@
  * WorldGen plugin - (c) 2013 by Michael Huttinger (TheHUTMan)
  * LPGL v3.0 License
  */
-package local.thehutman.worldgen.v1_8_R3;
+package local.thehutman.worldgen.v1_8_R2;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -38,6 +38,7 @@ public class WorldInterface {
 	Class<?> clObjStrucBox;
 	Class<?> clObjStruc;
 	Class<?> clObjStart;
+	Class<?> clObjBlockPos;
 
 	public WorldInterface(Player player, String nameClass) {
 		
@@ -56,6 +57,7 @@ public class WorldInterface {
 			clObjWorldProvider = Class.forName(pckMinecraft + ".WorldProvider");
 			clObjStrucBox = Class.forName(pckMinecraft + ".StructureBoundingBox");
 			clObjStruc = Class.forName(pckMinecraft + ".StructureStart");
+			clObjBlockPos = Class.forName(pckMinecraft + ".BlockPosition");
 			for(Class<?> myclass:clObjGenerator.getDeclaredClasses()){
 				clObjStart = myclass;
 				break;

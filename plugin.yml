@@ -22,6 +22,7 @@ permissions:
       worldgen.command.village: true
       worldgen.command.simple: true
       worldgen.command.witch: true
+      worldgen.command.dungeon: true
   worldgen.command.monument:
     description: Allow user to generate a water temple
     default: op
@@ -48,6 +49,9 @@ permissions:
     default: op
   worldgen.command.witch:
     description: Allow user to generate a witch's hut
+    default: op
+  worldgen.command.dungeon:
+    description: Allow user to generate a dungeon
     default: op
 
 commands:

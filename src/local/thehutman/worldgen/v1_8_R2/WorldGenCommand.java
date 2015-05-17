@@ -1,4 +1,4 @@
-package local.thehutman.worldgen.v1_8_R3;
+package local.thehutman.worldgen.v1_8_R2;
 
 import local.thehutman.worldgen.WorldGen;
 
@@ -56,6 +56,8 @@ public class WorldGenCommand implements CommandExecutor{
 					return true;
 				}
 				WorldGenVillage.generate(player, radius, "worldgen.command.village");
+			} else if (type.equals("dungeon") || type.equals("Blaze") || type.equals("Skeleton") || type.equals("Zombie") || type.equals("Spider") || type.equals("Cow") || type.equals("Pig") || type.equals("Sheep") || type.equals("Rabbit") || type.equals("Ghast") || type.equals("Ocelot") || type.equals("Guardian") || type.equals("Squid")) {
+				WorldGenDungeons.generate(player, radius, "worldgen.command.dungeon", type, "WorldGenDungeons");
 			} else if (type.equals("witch") || type.equals("witchhut")) {
 				WorldGenTemple.generate(player, radius, "worldgen.command.witch");
 			} else if (type.equals("jtemple") || type.equals("jungletemple")) {
@@ -96,6 +98,9 @@ public class WorldGenCommand implements CommandExecutor{
 					sender.sendMessage(ChatColor.YELLOW + "/worldgen dtemple" + ChatColor.WHITE + " - Generate a desert temple");
 				}
 				if (radius == 3 || !(sender instanceof Player)) {
+					sender.sendMessage(ChatColor.YELLOW + "/worldgen dungeon" + ChatColor.WHITE + " - Generate a random dungeon");
+					sender.sendMessage(ChatColor.YELLOW + "/worldgen MOB" + ChatColor.WHITE + " - Generate a dungeon with that type of mob");
+					sender.sendMessage(ChatColor.WHITE + "Mobs: Zombie, Skeleton, Spider, Blaze, Ghast, Cow, Sheep, Pig, Guardian, Squid, Rabbit");
 //					sender.sendMessage(ChatColor.YELLOW + "/worldgen vblack" + ChatColor.WHITE + " - Generate a village blacksmith");
 //					sender.sendMessage(ChatColor.YELLOW + "/worldgen vbutcher" + ChatColor.WHITE + " - Generate a village butcher");
 //					sender.sendMessage(ChatColor.YELLOW + "/worldgen vfarm" + ChatColor.WHITE + " - Generate a village farm");
