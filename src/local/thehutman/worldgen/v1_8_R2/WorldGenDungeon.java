@@ -11,7 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-class WorldGenDungeons {
+class WorldGenDungeon {
 
 	public static void generate(Player player, int radius, String namePerm, String nameDisplay, String nameClass) {
 

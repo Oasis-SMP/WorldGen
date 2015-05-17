@@ -81,6 +81,9 @@ public class WorldInterface {
 		} catch (Exception e) {
 			oCraftWorldHandle = null;
 			oRandom = null;
+			Utility.log.info(nameClass);
+			Utility.log.info(pckCraft);
+			Utility.log.info(pckMinecraft);
 			e.printStackTrace();
 		}
 	}
