@@ -39,6 +39,7 @@ public class WorldInterface {
 	Class<?> clObjStruc;
 	Class<?> clObjStart;
 	Class<?> clObjBlockPos;
+	Class<?> clObjChunkSnapshot;
 
 	public WorldInterface(Player player, String nameClass) {
 		
@@ -58,6 +59,7 @@ public class WorldInterface {
 			clObjStrucBox = Class.forName(pckMinecraft + ".StructureBoundingBox");
 			clObjStruc = Class.forName(pckMinecraft + ".StructureStart");
 			clObjBlockPos = Class.forName(pckMinecraft + ".BlockPosition");
+			clObjChunkSnapshot = Class.forName(pckMinecraft + ".ChunkSnapshot");
 			for(Class<?> myclass:clObjGenerator.getDeclaredClasses()){
 				clObjStart = myclass;
 				break;

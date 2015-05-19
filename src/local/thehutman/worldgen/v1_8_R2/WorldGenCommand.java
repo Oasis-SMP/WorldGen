@@ -1,5 +1,6 @@
 package local.thehutman.worldgen.v1_8_R2;
 
+import local.thehutman.worldgen.Utility;
 import local.thehutman.worldgen.WorldGen;
 
 import org.bukkit.ChatColor;
@@ -28,17 +29,33 @@ public class WorldGenCommand implements CommandExecutor{
 		if (cmd.getName().equalsIgnoreCase("worldgen")) {
 
 			// Check for valid args
-			if (args.length > 2)
-				return false;
 
 			String type = "";
 			int radius = 200;
+			String type2 = "Zombie";
 
 			if (args.length >= 1)
 				type = args[0].toLowerCase();
 			if (args.length == 2)
-				radius = Integer.parseInt(args[1]);
+				try {
+					radius = Integer.parseInt(args[1]);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					type2 = args[1];
+					radius = 10;
+				}
 
+			if (args.length == 3 && args[0].equalsIgnoreCase("dungeon")){
+				try {
+					radius = Integer.parseInt(args[2]);
+					type2 = args[1];
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					Utility.sendMsg(player, "&cYou screwed something up...");
+				}
+				
+				
+			}
 			// Check if this is a player, or if we are asking for help
 			if (!(sender instanceof Player)) {
 				if (!type.equals("") && !type.equals("help")) {
@@ -56,8 +73,10 @@ public class WorldGenCommand implements CommandExecutor{
 					return true;
 				}
 				WorldGenVillage.generate(player, radius, "worldgen.command.village");
-			} else if (type.equals("dungeon") || type.equals("Blaze") || type.equals("Skeleton") || type.equals("Zombie") || type.equals("Spider") || type.equals("Cow") || type.equals("Pig") || type.equals("Sheep") || type.equals("Rabbit") || type.equals("Ghast") || type.equals("Ocelot") || type.equals("Guardian") || type.equals("Squid")) {
-				WorldGenDungeon.generate(player, radius, "worldgen.command.dungeon", type, "WorldGenDungeons");
+			} else if (type.equalsIgnoreCase("dungeon")) {
+				WorldGenDungeon.generate(player, radius, "worldgen.command.dungeon", type, type2, "WorldGenDungeons");
+			} else if (type.equals("cave")) {
+				WorldGenCave.generate(player, radius, "worldgen.command.cave");
 			} else if (type.equals("witch") || type.equals("witchhut")) {
 				WorldGenTemple.generate(player, radius, "worldgen.command.witch");
 			} else if (type.equals("jtemple") || type.equals("jungletemple")) {

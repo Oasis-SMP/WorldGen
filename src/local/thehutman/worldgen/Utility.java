@@ -6,6 +6,10 @@ package local.thehutman.worldgen;
 
 import java.util.logging.Logger;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.entity.Player;
+
 /**
  * Utility class for various common routines
  * 
@@ -18,6 +22,14 @@ public class Utility {
 	 * Global static property holding an instance to the console logger for our plugin
 	 */
 	public static Logger log;
+	
+	public static void log(String msg){
+		log.info(msg);
+	}
+	
+	public static void sendMsg(Player player,String msg){
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+	}
 
 	/**
 	 * Helper function to find the base package string that contains a class.
