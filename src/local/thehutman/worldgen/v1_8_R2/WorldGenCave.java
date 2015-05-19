@@ -1,9 +1,6 @@
 package local.thehutman.worldgen.v1_8_R2;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.Random;
-
 import local.thehutman.worldgen.Utility;
 
 import org.bukkit.ChatColor;
